@@ -1,0 +1,27 @@
+project_id = "jyikafbhvtwvrwuatuaq"
+
+[functions.regenerate-selected-messages]
+enabled = true
+verify_jwt = true
+import_map = "./functions/regenerate-selected-messages/deno.json"
+# Uncomment to specify a custom file path to the entrypoint.
+# Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx
+entrypoint = "./functions/regenerate-selected-messages/index.ts"
+# Specifies static files to be bundled with the function. Supports glob patterns.
+# For example, if you want to serve static HTML pages in your function:
+# static_files = [ "./functions/regenerate-selected-messages/*.html" ]
+
+[functions.customer-portal]
+enabled = true
+verify_jwt = true
+
+[functions.check-subscription]
+enabled = true
+verify_jwt = true
+
+[functions.create-checkout]
+enabled = true
+verify_jwt = true
+
+[functions.stripe-webhook]
+verify_jwt = false

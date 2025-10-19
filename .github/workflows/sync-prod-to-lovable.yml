@@ -1,0 +1,34 @@
+name: sync-main-to-main-lovable
+
+on:
+   push:
+      branches:
+         - prod
+
+permissions:
+   contents: write
+
+jobs:
+   sync:
+      runs-on: ubuntu-latest
+      steps:
+         - name: checkout repo
+           uses: actions/checkout@v3
+           with:
+              fetch-depth: 0
+              token: ${{ secrets.GITHUB_TOKEN }}
+              persist-credentials: true
+
+         - name: fetch all branches
+           run: git fetch origin
+
+         - name: configure github-actions bot identity
+           run: |
+              git config user.name "github-actions[bot]"
+              git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+         - name: merge prod into main-lovable
+           run: |
+              git checkout main-lovable
+              git merge origin/prod --no-edit || exit 1
+              git push origin main-lovable
